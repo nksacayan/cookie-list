@@ -1,9 +1,15 @@
 import Navbar from "./components/Navbar";
+import HomePage from "./views/HomePage";
+
+import Container from "react-bootstrap/Container";
 
 function App() {
   return (
     <>
-      <Navbar />;
+      <Navbar />
+      <Container>
+        <HomePage />
+      </Container>
     </>
   );
 }
