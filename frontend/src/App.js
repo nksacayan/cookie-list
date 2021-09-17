@@ -12,11 +12,11 @@ function App() {
       <Navbar />
       <Container>
         <Switch>
-          <Route path="/home">
-            <HomePage />
-          </Route>
           <Route path="/login">
             <LoginPage />
+          </Route>
+          <Route path="/">
+            <HomePage />
           </Route>
         </Switch>
       </Container>

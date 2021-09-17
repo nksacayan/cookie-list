@@ -11,7 +11,6 @@ function MyNavbar() {
     >
       <Navbar.Brand href="/">The Chip List</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Nav.Link href="/home">Home</Nav.Link>
       <Nav.Link href="/login">Login</Nav.Link>
     </Navbar>
   );
