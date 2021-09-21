@@ -15,7 +15,15 @@ function LoginPage() {
           <Form.Label>Password</Form.Label>
           <Form.Control type="password" />
         </Form.Group>
-        <Button variant="primary">Submit</Button>
+        <Button
+          variant="primary"
+          type="submit"
+          onClick={() => {
+            console.log("Hit button!");
+          }}
+        >
+          Submit
+        </Button>
       </Form>
 
       <Nav>
