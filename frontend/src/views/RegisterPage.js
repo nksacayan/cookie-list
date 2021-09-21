@@ -1,6 +1,6 @@
 import Form from "react-bootstrap/Form";
 
-function LoginPage() {
+function RegisterPage() {
   return (
     <>
       <Form>
@@ -9,7 +9,11 @@ function LoginPage() {
           <Form.Control type="email" placeholder="name@example.com" />
         </Form.Group>
         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-          <Form.Label>Example textarea</Form.Label>
+          <Form.Label>Username</Form.Label>
+          <Form.Control as="textarea" rows={3} />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+          <Form.Label>Password</Form.Label>
           <Form.Control as="textarea" rows={3} />
         </Form.Group>
       </Form>
@@ -17,4 +21,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default RegisterPage;
