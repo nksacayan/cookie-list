@@ -1,6 +1,8 @@
 import express from "express";
 import mysql from "mysql2";
 
+import password from "../private/password";
+
 const app = express();
 const PORT = 3000;
 
@@ -10,7 +12,7 @@ app.use(express.json());
 const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "Rohan_Brain!",
+  password: password,
   database: "cookielist",
 });
 
