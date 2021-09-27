@@ -13,6 +13,7 @@ function MyNavbar() {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Nav.Link href="/login">Login</Nav.Link>
       <Nav.Link href="/about">About</Nav.Link>
+      <Nav.Link href="/userInfo">User</Nav.Link>
     </Navbar>
   );
 }

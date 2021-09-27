@@ -4,7 +4,7 @@ import mysql from "mysql2";
 import password from "../private/password";
 
 const app = express();
-const PORT = 3000;
+const PORT = 8000;
 
 // create the connection to database
 const connection = mysql.createConnection({

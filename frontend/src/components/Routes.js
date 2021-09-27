@@ -5,6 +5,7 @@ import AboutPage from "../views/AboutPage";
 import LoginPage from "../views/LoginPage";
 import NotFoundPage from "../views/NotFoundPage";
 import RegisterPage from "../views/RegisterPage";
+import UserInfoPage from "../views/UserInfoPage";
 
 function Routes() {
   return (
@@ -21,6 +22,9 @@ function Routes() {
         </Route>
         <Route path="/about">
           <AboutPage />
+        </Route>
+        <Route path="/userInfo">
+          <UserInfoPage />
         </Route>
         <Route path="*">
           <NotFoundPage />
