@@ -5,13 +5,13 @@ const PORT = 3000;
 
 app.use(express.json());
 
-let data = {
+let testData = {
   name: "Nick",
   age: "18",
 };
 
 app.get("/", (req, res) => {
-  res.json(data);
+  res.json(testData);
 });
 
 app.post("/", (req, res) =>
