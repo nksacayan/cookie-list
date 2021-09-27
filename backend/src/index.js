@@ -1,9 +1,33 @@
 import express from "express";
+import mysql from "mysql2";
 
 const app = express();
 const PORT = 3000;
 
 app.use(express.json());
+
+// create the connection to database
+const connection = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "Rohan_Brain!",
+  database: "cookielist",
+});
+
+connection.connect(function (err) {
+  if (err) {
+    console.error("error connecting: " + err.stack);
+    return;
+  }
+
+  console.log("connected as id " + connection.threadId);
+});
+
+connection.query("SELECT * FROM cookielist.user", function (err, rows, fields) {
+  if (err) throw err;
+
+  console.log(rows[0]);
+});
 
 let testData = {
   name: "Nick",
@@ -32,3 +56,5 @@ app.delete("/", (req, res) =>
 );
 
 app.listen(PORT, () => console.log(`Your server is running on port ${PORT}`));
+
+connection.end();
