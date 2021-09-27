@@ -25,9 +25,10 @@ connection.connect(function (err) {
   console.log("connected as id " + connection.threadId);
 });
 
-connection.query("SELECT * FROM cookielist.user", function (err, rows, fields) {
+connection.query("SELECT * FROM cookielist.user", function (err, rows) {
   if (err) throw err;
 
+  console.log("This is a test query");
   console.log(rows[0]);
 });
 
