@@ -6,8 +6,6 @@ import password from "../private/password";
 const app = express();
 const PORT = 3000;
 
-app.use(express.json());
-
 // create the connection to database
 const connection = mysql.createConnection({
   host: "localhost",
@@ -16,48 +14,45 @@ const connection = mysql.createConnection({
   database: "cookielist",
 });
 
-connection.connect(function (err) {
-  if (err) {
-    console.error("error connecting: " + err.stack);
+let sqlTestQuery = "SELECT * FROM user";
+
+connection.connect((error) => {
+  if (error) {
+    console.error("error connecting: " + error.stack);
     return;
   }
 
   console.log("connected as id " + connection.threadId);
 });
 
-connection.query("SELECT * FROM cookielist.user", function (err, rows) {
-  if (err) throw err;
+connection.query(sqlTestQuery, (error, results) => {
+  if (error) throw error;
 
   console.log("This is a test query");
-  console.log(rows[0]);
+  console.log(results);
 });
 
-let testData = {
-  name: "Nick",
-  age: "18",
-};
+app
+  .route("/api")
+  .get((req, res) => {
+    let sql = "SELECT * FROM user";
+    connection.query(sql, (error, results) => {
+      if (error) throw error;
 
-app.get("/", (req, res) => {
-  res.json(testData);
-});
+      res.send(results);
+    });
+  })
+  .post((req, res) => {
+    let sql =
+      "INSERT INTO user (username, email, password) VALUES ('testName', 'testEmail', 'testPassword')";
+    connection.query(sql, (error, results) => {
+      if (error) throw error;
 
-app.post("/", (req, res) =>
-  res.send(`a post request with / route on port ${PORT}`)
-);
-
-app.post("/:id", (req, res) => {
-  res.send(`a post request with / route on port ${PORT}`);
-  console.log(req.params.id);
-});
-
-app.put("/", (req, res) =>
-  res.send(`a put request with / route on port ${PORT}`)
-);
-
-app.delete("/", (req, res) =>
-  res.send(`a post delete with / route on port ${PORT}`)
-);
+      res.send(results);
+    });
+  });
 
 app.listen(PORT, () => console.log(`Your server is running on port ${PORT}`));
 
-connection.end();
+// connection.end();
+// Idk when im supposed to end this
