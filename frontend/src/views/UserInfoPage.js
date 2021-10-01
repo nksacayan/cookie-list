@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 
 function UserInfoPage() {
-  const [user, setUser] = useState({ name: "name", email: "email" });
+  const [user, setUser] = useState({ name: "-", email: "@" });
 
   return (
     <>
@@ -13,7 +13,9 @@ function UserInfoPage() {
         onClick={() => {
           fetch("/api", {
             method: "GET",
-          }).then((response) => console.log(response));
+          })
+            .then((response) => response.json())
+            .then((data) => console.log(data));
         }}
       >
         Get User

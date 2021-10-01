@@ -14,8 +14,6 @@ const connection = mysql.createConnection({
   database: "cookielist",
 });
 
-let sqlTestQuery = "SELECT * FROM user";
-
 connection.connect((error) => {
   if (error) {
     console.error("error connecting: " + error.stack);
@@ -25,32 +23,33 @@ connection.connect((error) => {
   console.log("connected as id " + connection.threadId);
 });
 
-connection.query(sqlTestQuery, (error, results) => {
-  if (error) throw error;
+app.post("/api", (req, res) => {
+  let sql =
+    "INSERT INTO user (username, email, password) VALUES ('testName', 'testEmail', 'testPassword')";
+  connection.query(sql, (error, results) => {
+    if (error) throw error;
 
-  console.log("This is a test query");
-  console.log(results);
+    res.send(results);
+  });
 });
 
-app
-  .route("/api")
-  .get((req, res) => {
-    let sql = "SELECT * FROM user";
-    connection.query(sql, (error, results) => {
-      if (error) throw error;
+app.get("/api", (req, res) => {
+  let sql = "SELECT * FROM user";
+  connection.query(sql, (error, results) => {
+    if (error) throw error;
 
-      res.send(results);
-    });
-  })
-  .post((req, res) => {
-    let sql =
-      "INSERT INTO user (username, email, password) VALUES ('testName', 'testEmail', 'testPassword')";
-    connection.query(sql, (error, results) => {
-      if (error) throw error;
-
-      res.send(results);
-    });
+    res.send(results);
   });
+});
+
+app.get("/api/:id", (req, res) => {
+  let sql = "SELECT * FROM user";
+  connection.query(sql, (error, results) => {
+    if (error) throw error;
+
+    res.send(results);
+  });
+});
 
 app.listen(PORT, () => console.log(`Your server is running on port ${PORT}`));
 
