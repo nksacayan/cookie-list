@@ -23,33 +23,59 @@ connection.connect((error) => {
   console.log("connected as id " + connection.threadId);
 });
 
-app.post("/api", (req, res) => {
-  let sql =
-    "INSERT INTO user (username, email, password) VALUES ('testName', 'testEmail', 'testPassword')";
+app.get("/cookie", (req, res) => {
+  let sql = "SELECT * FROM cookie";
+  defaultConnectionQuery(sql, res);
+});
+
+app.get("/cookie/:id", (req, res) => {
+  let id = mysql.escape(req.params.id);
+  let sql = `SELECT * FROM cookie WHERE id = ${id}`;
+  defaultConnectionQuery(sql, res);
+});
+
+app.post("/cookie/:name", (req, res) => {
+  let name = mysql.escape(req.params.name);
+  let sql = `INSERT INTO cookie (name) VALUES (${name})`;
+  defaultConnectionQuery(sql, res);
+});
+
+function defaultConnectionQuery(sql, res) {
   connection.query(sql, (error, results) => {
     if (error) throw error;
 
     res.send(results);
   });
-});
+}
 
-app.get("/api", (req, res) => {
-  let sql = "SELECT * FROM user";
-  connection.query(sql, (error, results) => {
-    if (error) throw error;
+// Decided against focusing on user accounts, commented instead of deleted for now
+// app.post("/api", (req, res) => {
+//   let sql =
+//     "INSERT INTO user (username, email, password) VALUES ('testName', 'testEmail', 'testPassword')";
+//   connection.query(sql, (error, results) => {
+//     if (error) throw error;
 
-    res.send(results);
-  });
-});
+//     res.send(results);
+//   });
+// });
 
-app.get("/api/:id", (req, res) => {
-  let sql = "SELECT * FROM user";
-  connection.query(sql, (error, results) => {
-    if (error) throw error;
+// app.get("/api", (req, res) => {
+//   let sql = "SELECT * FROM user";
+//   connection.query(sql, (error, results) => {
+//     if (error) throw error;
 
-    res.send(results);
-  });
-});
+//     res.send(results);
+//   });
+// });
+
+// app.get("/api/:id", (req, res) => {
+//   let sql = "SELECT * FROM user";
+//   connection.query(sql, (error, results) => {
+//     if (error) throw error;
+
+//     res.send(results);
+//   });
+// });
 
 app.listen(PORT, () => console.log(`Your server is running on port ${PORT}`));
 
