@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 
 function UserInfoPage() {
-  const [user, setUser] = useState({ name: "-", email: "@" });
+  const [user] = useState({ name: "-", email: "@" });
 
   return (
     <>

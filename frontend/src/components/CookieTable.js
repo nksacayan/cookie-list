@@ -5,12 +5,11 @@ import React, { useState, useEffect } from "react";
 
 function CookieTable() {
   const [cookies, setCookies] = useState([]);
-
-  let sampleCookies = [
-    { id: 1, name: "Oreo", score: 5 },
-    { id: 2, name: "Lemon Crunch", score: -3 },
-    { id: 3, name: "Thin Mint", score: 10000 },
-  ];
+  useEffect(() => {
+    fetch("/api/cookie")
+      .then((response) => response.json())
+      .then((data) => setCookies(data));
+  });
 
   return (
     <>
@@ -24,7 +23,7 @@ function CookieTable() {
             </tr>
           </thead>
           <tbody>
-            <CookieList cookies={sampleCookies} />
+            <CookieList cookies={cookies} />
           </tbody>
         </Table>
       </Container>
@@ -34,7 +33,7 @@ function CookieTable() {
 
 function CookieList({ cookies }) {
   const listItems = cookies.map((cookie) => (
-    <tr>
+    <tr key={cookie.id}>
       <td>{cookie.id}</td>
       <td>{cookie.name}</td>
       <td>{cookie.score}</td>
